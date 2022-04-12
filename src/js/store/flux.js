@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			lists: []
+			list: []
 		},
 		actions: {
 			getData: () => {
@@ -24,7 +24,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.status === 200 ? getActions().getData() : "")
 					.catch(error => console.log("error", error))
-			}
+			},
+			editItem: () => {
+
+			},
+			deleteItem: (item) => {
+				fetch("https://assets.breatheco.de/apis/fake/todos/user/billy", {
+					method: "PUT",
+					redirect: "follow",
+					headers: {
+						"Content-type": "application/json"
+					},
+					body: JSON.stringify([...getStore().list.filter((i) => item !== i)])
+				})
+					.then(response => response.status === 200 ? getActions().getData() : "")
+					.catch(error => console.log("error", error))
+			},
 		}
 	};
 };

@@ -1,0 +1,53 @@
+.bullets {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+.box {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: auto;
+    background-color: white;
+    box-shadow: 1px 1px 1px 1px hsl(0deg 0% 73%);
+}
+
+body {
+    background-color:  hsl(0deg 0% 95%);;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+h1 {
+    color: hsl(0deg 32% 90%);
+    margin: auto;
+    font-size: 100px;
+    font-weight: 100;
+}
+span {
+    font-size: 12px;
+    padding: 3%;
+}
+input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid black;
+}
+button {
+    width: 20%;
+}
+.ib {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 8px;
+}
+li {
+    padding-top: 1%;
+    display: flex;
+    border-bottom: 1px solid black;
+}

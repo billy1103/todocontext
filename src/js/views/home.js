@@ -5,6 +5,7 @@ import { Context } from "../store/appContext.js"
 export const Home = () => {
 	const { store, actions } = useContext(Context)
 	const [item, setItem] = useState("")
+	console.log(store.list)
 
 	return (
 		<div className="box">
@@ -22,7 +23,7 @@ export const Home = () => {
 					type="button"
 					onClick={() => {
 						if (item !== "") {
-							actions.addItems(item)
+							actions.addItem(item)
 							setItem("");
 						}
 					}}>
@@ -30,18 +31,20 @@ export const Home = () => {
 				</button>
 			</div>
 			<ul className="bullets">
-				{store.list.map((element, i) => {
+				{store.list.slice(1).map((element, i) => {
 					return (
 						<li key={i}>
-							{element.done ?
-								<p>
-									{element.label}
-								</p>
-								:
-								<p>
-									{element.label}
-								</p>
-				}</li>)
+							<p>
+								{element.label}
+							</p>
+							<button
+								onClick={() => {
+									actions.deleteItem(element)
+
+								}}>
+								X
+							</button>
+						</li>)
 				})}
 			</ul>
 		</div>
