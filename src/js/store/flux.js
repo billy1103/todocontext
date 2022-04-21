@@ -28,16 +28,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			editItem: () => {
 
 			},
-			deleteItem: (item) => {
+			deleteTodo: (index) => {
+				const rid = getStore().list.filter((item, i) => index !== i)
 				fetch("https://assets.breatheco.de/apis/fake/todos/user/billy", {
 					method: "PUT",
 					redirect: "follow",
 					headers: {
 						"Content-type": "application/json"
 					},
-					body: JSON.stringify([...getStore().list.filter((i) => item !== i)])
+					body: JSON.stringify(rid)
 				})
-					.then(response => response.status === 200 ? getActions().getData() : "")
+					.then(response => response.status === 200 ? getStore({list:rid}) : "")
 					.catch(error => console.log("error", error))
 			},
 		}

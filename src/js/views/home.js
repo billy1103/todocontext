@@ -5,7 +5,7 @@ import { Context } from "../store/appContext.js"
 export const Home = () => {
 	const { store, actions } = useContext(Context)
 	const [item, setItem] = useState("")
-	console.log(store.list)
+	console.log(store.list);
 
 	return (
 		<div className="box">
@@ -18,12 +18,17 @@ export const Home = () => {
 						setItem(event.target.value);
 					}}
 					value={item}
+					onKeyUp={(e) => {
+						if (e.key == "Enter" && item !== "") {
+							actions.addItem([...store.list, { label: item, done: false }]);
+							setItem("")
+						}
+					}}
 				/>
 				<button
-					type="button"
 					onClick={() => {
 						if (item !== "") {
-							actions.addItem(item)
+							actions.addItem([...store.list, { label: item, done: false }])
 							setItem("");
 						}
 					}}>
@@ -31,22 +36,22 @@ export const Home = () => {
 				</button>
 			</div>
 			<ul className="bullets">
-				{store.list.slice(1).map((element, i) => {
+				{store.list.map((item, index) => {
 					return (
-						<li key={i}>
-							<p>
-								{element.label}
-							</p>
+						<li key={index}>
+							{item.label}
 							<button
-								onClick={() => {
-									actions.deleteItem(element)
+								onClick={() =>
+									actions.deleteTodo(index)
 
-								}}>
+								}>
 								X
 							</button>
-						</li>)
+						</li>
+					);
 				})}
 			</ul>
+			<span>{store.list.lenght} items left</span>
 		</div>
 	);
 };
