@@ -18,17 +18,17 @@ export const Home = () => {
 						setItem(event.target.value);
 					}}
 					value={item}
-					onKeyUp={(e) => {
-						if (e.key == "Enter" && item !== "") {
-							actions.addItem([...store.list, { label: item, done: false }]);
-							setItem("")
-						}
-					}}
+					// onKeyUp={(e) => {
+					// 	if (e.key == "Enter" && item !== "") {
+					// 		actions.addItem(item);
+					// 		setItem("")
+					// 	}
+					// }}
 				/>
 				<button
 					onClick={() => {
 						if (item !== "") {
-							actions.addItem([...store.list, { label: item, done: false }])
+							actions.addItem(item)
 							setItem("");
 						}
 					}}>
@@ -36,14 +36,14 @@ export const Home = () => {
 				</button>
 			</div>
 			<ul className="bullets">
-				{store.list.map((item, index) => {
+				{store.list.slice(1).map((item, i) => {
 					return (
-						<li key={index}>
+						<li key={i}>
 							{item.label}
 							<button
 								onClick={() =>
-									actions.deleteTodo(index)
-
+									actions.deleteTodo(store.list.filter((item, index) => index !== i))
+									
 								}>
 								X
 							</button>
@@ -51,7 +51,7 @@ export const Home = () => {
 					);
 				})}
 			</ul>
-			<span>{store.list.lenght} items left</span>
+			<span>{store.list.length-1} items left</span>
 		</div>
 	);
 };
